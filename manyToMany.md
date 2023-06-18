@@ -1,5 +1,5 @@
 # Many to many relationship
-a many-to-many relationship is a user that has many roles and those roles are also shared by other users in the application
+a many-to-many relationship is a user that has many roles and those roles are also shared by other users in the application 
 
 # 1): Set up your models and migrations:
 

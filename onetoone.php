@@ -2,7 +2,7 @@
 
 
 One to one relationship
-Define the relationships in the models:
+Define the relationships in the models:    
 
 In the User model, define a hasOne relationship to the Profile model. This indicates that a user has one profile.
 In the Profile model, define a belongsTo relationship to the User model. This establishes the reverse relationship, indicating that a profile belongs to a user.

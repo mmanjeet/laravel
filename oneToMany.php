@@ -1,5 +1,5 @@
 One to many relationship
-A one-to-many relationship is used to define relationships where a single model is the parent to one or more child models.
+A one-to-many relationship is used to define relationships where a single model is the parent to one or more child models. 
 
 // User.php
 public function posts()
