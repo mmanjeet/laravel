@@ -15,7 +15,7 @@ php artisan make:migration create_user_role_table
 # 2):Define relationships in the models:
     In the User model, define the roles relationship using the belongsToMany method, specifying the Role model and the name of the pivot table.
       // User.php
-    ```bash
+    
         namespace App\Models;
 
         use Illuminate\Database\Eloquent\Model;
@@ -27,7 +27,7 @@ php artisan make:migration create_user_role_table
                 return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id', 'id', 'id');
             }
         }
-    ```
+    
         Let's break down the parameters:
 
         Role::class: The related model class that the User model is associated with. In this example, we assume the related model is Role.
@@ -47,7 +47,7 @@ php artisan make:migration create_user_role_table
     In the Role model, define the users relationship in the same way.
         
         // Role.php
-    ```bash
+    
         namespace App\Models;
 
         use Illuminate\Database\Eloquent\Model;
@@ -59,7 +59,7 @@ php artisan make:migration create_user_role_table
                 return $this->belongsToMany(User::class, 'role_user', 'role_id', 'user_id', 'id', 'id');
             }
         }
-    ```
+    
         Let's explain the parameters:
 
         User::class: The related model class that the Role model is associated with. In this example, we assume the related model is User.
@@ -76,18 +76,18 @@ php artisan make:migration create_user_role_table
 
 
 # 3): Run the migrations to create the tables.
-    ```bash 
+    
        php artisan migrate
-    ```   
+      
 # Inserting records with relationships:
-        ```bash
+        
             $user = new User();
             $user->name = 'John Doe';
             $user->email = 'john@example.com';
             $user->save();
             $roleIds = [2, 3, 4];
             $user->roles()->attach($roleIds);
-        ```
+       
 
 # Updating records with relationships:
     Retrieve the user you want to update:
@@ -98,29 +98,29 @@ php artisan make:migration create_user_role_table
             $user->roles()->sync($updatedRoleIds);
     This will update the records in the pivot table to associate the user with the updated roles. 
 Full Example:
-        ```bash
+        
             $user = User::find(1);
             $updatedRoleIds = [2, 4, 6];
             $user->roles()->sync($updatedRoleIds);
-        ```
+        
 
 # Fetch Records:
     To Retrieve all roles associated with a user: 
-    ```bash
+    
             $user = User::with('roles')->find(1);
             $roles = $user->roles;
-    ```        
+          
     To Retrieve all users associated with a role:
-    ```bash
+    
             $role = Role::with('users')->find(1);
             $users = $role->users;
-    ```        
+         
     To retrieve users who have a specific role using the whereHas method.
-    ```bash
+    
             $users = User::whereHas('roles', function ($query) {
                 $query->where('name', 'admin');
             })->get();
-    ```        
+           
 
        
              
